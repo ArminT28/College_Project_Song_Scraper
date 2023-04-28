@@ -1,0 +1,348 @@
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary bg-primary"
+  data-bs-theme="dark"
+>
+  <div class="container-fluid">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          href="#"
+          (click)="seeLandingPage()"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="#"
+          aria-current="page"
+          (click)="seeAllSongsButtonClicked()"
+          >See All Songs</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="addSongButtonClicked()">
+          Add Song
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="removeSongButtonClicked()">
+          Remove Song
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="updateSongButtonClicked()">
+          Update Song
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="scrapeSongButtonClicked()">
+          Scrape For A Song From Youtube Music
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div id="mainContainer" class="marginscenter">
+  <div *ngIf="showLandingPage === true">
+    <body>
+      <div class="container">
+        <div class="header">
+          <img src="" class="logo" />
+          <nav>
+            <ul>
+              <li><a href="">Home</a></li>
+              <li><a href="">Products</a></li>
+              <li><a href="">Community</a></li>
+              <li><a href="">Contact</a></li>
+            </ul>
+          </nav>
+          <button class="btn" id="btn1">Log In</button>
+          <button class="btn" id="btn2">Sign Up</button>
+        </div>
+        <div class="content">
+          <div class="text">
+            <h1>
+              Be Young, Have Fun, <br />
+              <span>Drink Pepsi</span>
+            </h1>
+            <p>
+              Pepsi is a carbonated soft drink manufactured by PepsiCo.
+              <br />Originally created and developed in 1893 by Caleb Bradham
+              <br />and introduced as Brad's Drink, it was renamed as Pepsi-Cola
+              in 1898, and then shortened to Pepsi in 1961.
+            </p>
+            <button class="btn3">Buy Now</button>
+          </div>
+          <div class="pepsi">
+            <img src="" alt="" />
+          </div>
+        </div>
+      </div>
+    </body>
+  </div>
+  <div *ngIf="seeAllSongs === true">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nr.</th>
+          <th scope="col">Name</th>
+          <th scope="col">Duration</th>
+          <th scope="col">AlbumName</th>
+          <th scope="col">ArtistName</th>
+          <th scope="col">NumberOfPlays</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let song of songsFromDB; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ song.Name }}</td>
+          <td>{{ song.Duration }}</td>
+          <td>{{ song.AlbumName }}</td>
+          <td>{{ song.ArtistName }}</td>
+          <td>{{ song.NumberOfPlays }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="addSong === true">
+    <div class="mb-3">
+      <label for="newSongName" class="form-label">Name</label>
+      <input
+        class="form-control"
+        id="newSongName"
+        placeholder="Ex: Highway To Hell"
+        [(ngModel)]="newSongName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongDuration" class="form-label">Duration</label>
+      <div id="rangeCentering">
+        <label class="form-label" id="rangeLabel">0:01</label>
+        <input
+          type="range"
+          class="form-range"
+          id="newSongDuration"
+          [(ngModel)]="newSongDuration"
+        />
+        <label class="form-label" id="rangeLabel">10:00</label>
+      </div>
+      <!-- <fieldset disabled>
+        <input
+          type="text"
+          id="disabledTextInput"
+          class="form-control"
+          placeholder={{newSongDurationTransformed}}
+        />
+      </fieldset> -->
+    </div>
+    <div class="mb-3">
+      <label for="newSongAlbumName" class="form-label">AlbumName</label>
+      <input
+        class="form-control"
+        id="newSongAlbumNam"
+        [(ngModel)]="newSongAlbumName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongArtistName" class="form-label">ArtistName</label>
+      <input
+        class="form-control"
+        id="newSongArtistName"
+        [(ngModel)]="newSongArtistName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongNumberOfPlays" class="form-label"
+        >Number Of Plays</label
+      >
+      <div id="rangeCentering">
+        <label class="form-label" id="rangeLabel">1</label>
+        <input
+          type="range"
+          class="form-range"
+          id="newSongNumberOfPlays"
+          [(ngModel)]="newSongNumberOfPlays"
+        />
+        <label class="form-label" id="rangeLabel">1000000000</label>
+      </div>
+      <!-- <fieldset disabled>
+        <input
+          type="text"
+          id="disabledTextInput"
+          class="form-control"
+          placeholder={{newSongNumberOfPlays}}
+        />
+      </fieldset> -->
+    </div>
+    <button class="btn btn-primary" (click)="addSongToDB()">Add</button>
+  </div>
+  <div *ngIf="removeSong === true">
+    <div class="mb-3">
+      <label for="newSongName" class="form-label">Name</label>
+      <input
+        class="form-control"
+        id="newSongName"
+        placeholder="Ex: Highway To Hell"
+        [(ngModel)]="newSongName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongAlbumName" class="form-label">AlbumName</label>
+      <input
+        class="form-control"
+        id="newSongAlbumNam"
+        [(ngModel)]="newSongAlbumName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongArtistName" class="form-label">ArtistName</label>
+      <input
+        class="form-control"
+        id="newSongArtistName"
+        [(ngModel)]="newSongArtistName"
+      />
+    </div>
+    <button class="btn btn-primary" (click)="removeSongFromDB()">
+      Remove Song
+    </button>
+  </div>
+  <div *ngIf="updateSong === true">
+    <div class="mb-3">
+      <label for="newSongName" class="form-label">Name</label>
+      <input
+        class="form-control"
+        id="newSongName"
+        placeholder="Ex: Highway To Hell"
+        [(ngModel)]="newSongName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongDuration" class="form-label">Duration</label>
+      <div id="rangeCentering">
+        <label class="form-label" id="rangeLabel">0:01</label>
+        <input
+          type="range"
+          class="form-range"
+          id="newSongDuration"
+          [(ngModel)]="newSongDuration"
+        />
+        <label class="form-label" id="rangeLabel">10:00</label>
+      </div>
+      <!-- <fieldset disabled>
+        <input
+          type="text"
+          id="disabledTextInput"
+          class="form-control"
+          placeholder={{newSongDurationTransformed}}
+        />
+      </fieldset> -->
+    </div>
+    <div class="mb-3">
+      <label for="newSongAlbumName" class="form-label">AlbumName</label>
+      <input
+        class="form-control"
+        id="newSongAlbumNam"
+        [(ngModel)]="newSongAlbumName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongArtistName" class="form-label">ArtistName</label>
+      <input
+        class="form-control"
+        id="newSongArtistName"
+        [(ngModel)]="newSongArtistName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="newSongNumberOfPlays" class="form-label"
+        >Number Of Plays</label
+      >
+      <div id="rangeCentering">
+        <label class="form-label" id="rangeLabel">1</label>
+        <input
+          type="range"
+          class="form-range"
+          id="newSongNumberOfPlays"
+          [(ngModel)]="newSongNumberOfPlays"
+        />
+        <label class="form-label" id="rangeLabel">1000000000</label>
+      </div>
+      <!-- <fieldset disabled>
+        <input
+          type="text"
+          id="disabledTextInput"
+          class="form-control"
+          placeholder={{newSongNumberOfPlays}}
+        />
+      </fieldset> -->
+    </div>
+    <button class="btn btn-primary" (click)="updateSongFromDB()">Update</button>
+  </div>
+  <div *ngIf="scrapeSong === true">
+    <label for="newSongName" class="form-label"
+      >Song Link (Please add the url link WITHOUT the
+      "https://music.youtube.com/" beginning)</label
+    >
+    <input
+      class="form-control maringel"
+      id="scrapedSongLink"
+      placeholder="Ex: watch?v=l482T0yNkeo"
+      [(ngModel)]="scrapedSongLink"
+    />
+    <button class="btn btn-primary" (click)="scrapeForSong()">Scrape</button>
+  </div>
+  <div *ngIf="showScrapedData === true">
+    <fieldset disabled>
+      <div class="mb-3">
+        <label for="newSongName" class="form-label">Name</label>
+        <input
+          class="form-control"
+          id="newSongName disabledTextInput"
+          placeholder="{{ scrapedDataFromBackend.name }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="newSongDuration" class="form-label">Duration</label>
+        <fieldset disabled>
+          <input
+            type="text"
+            id="disabledTextInput"
+            class="form-control"
+            placeholder="{{ scrapedDataFromBackend.duration }}"
+          />
+        </fieldset>
+      </div>
+      <div class="mb-3">
+        <label for="newSongAlbumName" class="form-label">AlbumName</label>
+        <input
+          class="form-control"
+          id="newSongAlbumNam disabledTextInput"
+          placeholder="{{ scrapedDataFromBackend.albumname }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="newSongArtistName" class="form-label">ArtistName</label>
+        <input
+          class="form-control"
+          id="newSongArtistName disabledTextInput"
+          placeholder="{{ scrapedDataFromBackend.artistname }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="newSongNumberOfPlays" class="form-label"
+          >Number Of Plays</label
+        >
+        <input
+          type="text"
+          id="disabledTextInput"
+          class="form-control"
+          placeholder="{{ scrapedDataFromBackend.numberofplays }}"
+        />
+      </div>
+    </fieldset>
+    <button class="btn btn-primary" (click)="addScrapedSongToDB()">Add</button>
+  </div>
+</div>
