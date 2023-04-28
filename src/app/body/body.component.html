@@ -47,41 +47,51 @@
 </nav>
 <div id="mainContainer" class="marginscenter">
   <div *ngIf="showLandingPage === true">
-    <body>
-      <div class="container">
-        <div class="header">
-          <img src="" class="logo" />
-          <nav>
-            <ul>
-              <li><a href="">Home</a></li>
-              <li><a href="">Products</a></li>
-              <li><a href="">Community</a></li>
-              <li><a href="">Contact</a></li>
-            </ul>
-          </nav>
-          <button class="btn" id="btn1">Log In</button>
-          <button class="btn" id="btn2">Sign Up</button>
-        </div>
-        <div class="content">
-          <div class="text">
-            <h1>
-              Be Young, Have Fun, <br />
-              <span>Drink Pepsi</span>
-            </h1>
-            <p>
-              Pepsi is a carbonated soft drink manufactured by PepsiCo.
-              <br />Originally created and developed in 1893 by Caleb Bradham
-              <br />and introduced as Brad's Drink, it was renamed as Pepsi-Cola
-              in 1898, and then shortened to Pepsi in 1961.
-            </p>
-            <button class="btn3">Buy Now</button>
-          </div>
-          <div class="pepsi">
-            <img src="" alt="" />
-          </div>
+    <div class="pictureBackground">
+      <div class="container content">
+        <div class="text">
+          <h1>
+            Welcome to our website dedicated to song scrapers and database!
+            <br />
+            <span
+              >We are thrilled to have you here and share with you our passion
+              for music.
+            </span>
+          </h1>
+          <p>
+            Our website offers a comprehensive database of songs from all genres
+            and eras. <br />
+            Whether you're looking for the latest chart-topping hits or
+            nostalgic classics, we've got you covered. <br />
+            Our team of dedicated music enthusiasts works tirelessly to ensure
+            that our database is always up-to-date and accurate, so you can
+            trust that you're getting the latest and most complete information
+            available.
+          </p>
+          <p>
+            In addition to our extensive song database, we also offer a powerful
+            song scraper tool. <br />With this tool, you can easily search for
+            and download any song you want, regardless of where it's hosted.<br />
+            Our scraper is fast, reliable, and user-friendly, making it the
+            perfect tool for both casual listeners and music professionals
+            alike.
+          </p>
+          <p>
+            We're committed to providing our users with the best possible
+            experience, which is why we've designed our website to be easy to
+            use and navigate.<br />
+            Whether you're a music fan, a DJ, a musician, or just someone who
+            loves to listen to music, our website has something for you.
+          </p>
+          <p>
+            So, take a look around, explore our database, and try out our song
+            scraper tool.<br />
+            We're confident that you'll love what you find here and that our
+            website will become your go-to resource for all things music.
+          </p>
         </div>
       </div>
-    </body>
+    </div>
   </div>
   <div *ngIf="seeAllSongs === true">
     <table class="table">
@@ -295,54 +305,28 @@
     <button class="btn btn-primary" (click)="scrapeForSong()">Scrape</button>
   </div>
   <div *ngIf="showScrapedData === true">
-    <fieldset disabled>
-      <div class="mb-3">
-        <label for="newSongName" class="form-label">Name</label>
-        <input
-          class="form-control"
-          id="newSongName disabledTextInput"
-          placeholder="{{ scrapedDataFromBackend.name }}"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="newSongDuration" class="form-label">Duration</label>
-        <fieldset disabled>
-          <input
-            type="text"
-            id="disabledTextInput"
-            class="form-control"
-            placeholder="{{ scrapedDataFromBackend.duration }}"
-          />
-        </fieldset>
-      </div>
-      <div class="mb-3">
-        <label for="newSongAlbumName" class="form-label">AlbumName</label>
-        <input
-          class="form-control"
-          id="newSongAlbumNam disabledTextInput"
-          placeholder="{{ scrapedDataFromBackend.albumname }}"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="newSongArtistName" class="form-label">ArtistName</label>
-        <input
-          class="form-control"
-          id="newSongArtistName disabledTextInput"
-          placeholder="{{ scrapedDataFromBackend.artistname }}"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="newSongNumberOfPlays" class="form-label"
-          >Number Of Plays</label
-        >
-        <input
-          type="text"
-          id="disabledTextInput"
-          class="form-control"
-          placeholder="{{ scrapedDataFromBackend.numberofplays }}"
-        />
-      </div>
-    </fieldset>
-    <button class="btn btn-primary" (click)="addScrapedSongToDB()">Add</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nr.</th>
+          <th scope="col">Name</th>
+          <th scope="col">Duration</th>
+          <th scope="col">AlbumName</th>
+          <th scope="col">ArtistName</th>
+          <th scope="col">NumberOfPlays</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let song of scrapedDataFromBackend; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ song["name"] }}</td>
+          <td>{{ song["duration"] }}</td>
+          <td>{{ song["albumname"] }}</td>
+          <td>{{ song["artistname"] }}</td>
+          <td>{{ song["numberofplays"] }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-primary" (click)="addScrapedSongsToDB()">Add</button>
   </div>
 </div>

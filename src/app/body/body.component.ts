@@ -16,7 +16,7 @@ export class BodyComponent {
   showScrapedData:boolean = false;
   showLandingPage:boolean = true;
   scrapedSongLink:string = "";
-  scrapedDataFromBackend = {name:"",artistname:"",albumname:"",duration:0,numberofplays:0};
+  scrapedDataFromBackend = [];
 
   newSongName:string;
   newSongArtistName:string;
@@ -143,15 +143,25 @@ export class BodyComponent {
     this.seeAllSongsButtonClicked();
   }
 
-  addScrapedSongToDB(){
-    let song:Song = {
-      Name:this.scrapedDataFromBackend.name,
-      Duration:this.scrapedDataFromBackend.duration,
-      AlbumName:this.scrapedDataFromBackend.albumname,
-      ArtistName:this.scrapedDataFromBackend.artistname,
-      NumberOfPlays:this.scrapedDataFromBackend.numberofplays};
-
-    this.songService.addSong(song);
+  async addScrapedSongsToDB(){
+    for( var song of this.scrapedDataFromBackend)
+    {
+      let newsong:Song =
+      {
+        Name:song['name'],
+        Duration:song['duration'],
+        AlbumName:song['albumname'],
+        ArtistName:song['artistname'],
+        NumberOfPlays:song['numberofplays']
+      };
+      console.log(newsong);
+      try {
+        this.songService.addSong(newsong);
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }
 
     this.seeAllSongsButtonClicked();
   }

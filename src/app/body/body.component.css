@@ -200,3 +200,10 @@ background-color: #64af3d;
   top: -85px;
 }
 }
+
+#pictureBackground{
+  background-image: url('/images/360_F_296137279_m7WHxo2yVBZBUI4haLsOQfMfEhbmGcSs.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
