@@ -1,27 +1,76 @@
-# WebProgrammierungProjectAngular
+# Song Scraper App - Angular Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+This repository contains the **frontend part** of the Song Scraper Application, a project created in college over two days. The project is designed to connect to a Firebase database, allowing users to scrape songs from YouTube, add their information to a database, and manage the songs by editing or removing them. Additionally, the application displays a list of all songs that have ever been scraped and stored in the database.
 
-## Development server
+## Table of Contents
+- Features
+- Technologies Used
+- Setup
+- Usage
+- Project Structure
+- Contributing
+- License
+- README File
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Song Scraping**: Allows users to scrape song information from YouTube.
+- **Firebase Integration**: Connects to Firebase to store, edit, and delete song data.
+- **Song Management**: Provides options to view, edit, and remove songs in the database.
+- **Song List Display**: Shows a list of all songs that have ever been scraped and stored.
 
-## Build
+## Technologies Used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **Angular**: The frontend framework for building and structuring the application.
+- **Firebase**: Used for database management, providing real-time synchronization and data storage.
 
-## Running unit tests
+## Setup
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/ArminT28/song-scraper-frontend.git
+   cd song-scraper-frontend
+   ```
 
-## Running end-to-end tests
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. **Setup Firebase**:
+   - Create a Firebase project at [Firebase Console](https://firebase.google.com/).
+   - Obtain your Firebase configuration details (API Key, Auth Domain, Database URL, Project ID, etc.).
+   - Add your Firebase configuration to the environment files in the Angular project.
 
-## Further help
+4. **Run the Application**:
+   ```bash
+   ng serve
+   ```
+   Navigate to `http://localhost:4200/` in your browser to view the application.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usage
+
+- **Adding Songs**: Use the provided interface to scrape songs from YouTube and save their information in the Firebase database.
+- **Editing Songs**: Select any saved song to update its details in the database.
+- **Deleting Songs**: Remove any unwanted song entries from the database.
+- **Viewing All Songs**: The application provides a list view of all songs that have been added.
+
+## Project Structure
+
+- `src/app`: Contains the main Angular components, services, and routing files.
+- `src/environments`: Contains the Firebase configuration files.
+- `src/assets`: Holds static assets such as images, CSS files, and icons.
+
+## Contributing
+
+Contributions are welcome! If you'd like to improve or expand the project, feel free to fork the repository, make your changes, and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## README 
+
+This README file was generated using OpenAI's ChatGPT version 3.5.
